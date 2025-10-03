@@ -1,0 +1,290 @@
+/* Google Meet 스타일 웹캠 플랫폼 */
+
+* {
+  box-sizing: border-box;
+}
+
+.meet-container {
+  width: 100vw;
+  height: 100vh;
+  background: #202124;
+  color: #ffffff;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 웹캠 미리보기 영역 */
+.preview-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #2d2e30;
+}
+
+.webcam-preview {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16/9;
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.webcam-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a1a;
+  color: #9aa0a6;
+}
+
+.camera-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.camera-placeholder p {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* 사용자 이름 */
+.user-name {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+/* 미리보기 하단 컨트롤 */
+.preview-controls {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.control-icon {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.control-icon.mic.off {
+  background: #ea4335;
+  color: white;
+}
+
+.control-icon.mic.on {
+  background: #34a853;
+  color: white;
+}
+
+.control-icon.camera.off {
+  background: #ea4335;
+  color: white;
+}
+
+.control-icon.camera.on {
+  background: #34a853;
+  color: white;
+}
+
+.control-icon.layout {
+  background: #5f6368;
+  color: white;
+}
+
+.control-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 하단 설정 컨트롤 */
+.bottom-controls {
+  background: #ffffff;
+  border-top: 1px solid #dadce0;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.device-controls {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.device-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.device-icon {
+  font-size: 1.2rem;
+  color: #5f6368;
+}
+
+.device-select {
+  background: transparent;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: #202124;
+  cursor: pointer;
+  min-width: 180px;
+  font-family: inherit;
+}
+
+.device-select:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+.device-select:hover {
+  border-color: #1a73e8;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+  .preview-section {
+    padding: 1rem;
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .preview-section {
+    padding: 0.5rem;
+  }
+
+  .webcam-preview {
+    border-radius: 8px;
+  }
+
+  .bottom-controls {
+    padding: 1rem;
+  }
+
+  .device-controls {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .device-selector {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .device-select {
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .preview-controls {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .control-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .user-name {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+
+  .camera-icon {
+    font-size: 3rem;
+  }
+
+  .camera-placeholder p {
+    font-size: 1rem;
+  }
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.preview-section {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* 포커스 상태 */
+button:focus,
+select:focus {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f3f4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dadce0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5f6368;
+}
