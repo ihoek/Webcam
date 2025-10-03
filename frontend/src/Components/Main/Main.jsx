@@ -7,6 +7,7 @@ const Main = () => {
   const [isStreaming, setIsStreaming] = useState(false);
   const [isMicOn, setIsMicOn] = useState(false);
   const [isCameraOn, setIsCameraOn] = useState(false);
+  const [isVideoStarted, setIsVideoStarted] = useState(false);
 
   const toggleStream = () => {
     setIsStreaming(!isStreaming);
@@ -17,6 +18,18 @@ const Main = () => {
     setIsMicOn(!isMicOn);
   };
 
+  const startVideo = () => {
+    setIsVideoStarted(true);
+    setIsStreaming(true);
+    setIsCameraOn(true);
+  };
+
+  const stopVideo = () => {
+    setIsVideoStarted(false);
+    setIsStreaming(false);
+    setIsCameraOn(false);
+  };
+
   return (
     <div className="meet-container">
       {/* 웹캠 미리보기 영역 */}
@@ -25,7 +38,7 @@ const Main = () => {
           {isStreaming ? (
             <Webcam
               ref={webcamRef}
-              className="webcam-video"
+              className="webcam-video mirrored"
               audio={false}
               screenshotFormat="image/jpeg"
               videoConstraints={{
@@ -86,6 +99,21 @@ const Main = () => {
               <option>카메라를 찾을 수 없습니다</option>
             </select>
           </div>
+        </div>
+
+        {/* 화상 시작/종료 버튼 */}
+        <div className="video-control">
+          {!isVideoStarted ? (
+            <button className="video-start-button" onClick={startVideo}>
+              <span className="button-icon">▶️</span>
+              화상 시작
+            </button>
+          ) : (
+            <button className="video-stop-button" onClick={stopVideo}>
+              <span className="button-icon">⏹️</span>
+              화상 종료
+            </button>
+          )}
         </div>
       </div>
     </div>
